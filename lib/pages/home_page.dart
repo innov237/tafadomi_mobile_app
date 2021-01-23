@@ -46,16 +46,11 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // _pormoServices(),
+                      _pormoServices(),
                       SizedBox(
                         height: 10.0,
                       ),
-                      // _categorieList(),
-                      // servicePromo(),
-                      // requestHistorical(),
-                      // categories(),
-                      // ServiceProvider(),
-                      serviceRequest(),
+                      _categorieList(),
                     ],
                   ),
                 ],

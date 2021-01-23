@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tafadomi/pages/home_page.dart';
 import 'package:tafadomi/widgets/servicePage.dart';
 import 'package:tafadomi/pages/_services/serviceList.dart';
+import 'package:tafadomi/pages/splash_screen.dart';
 
 void main() {
   runApp(
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: serviciesList(),
+      home: Splash(),
     );
   }
 }
