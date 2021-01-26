@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:tafadomi/pages/home_page.dart';
+import 'package:tafadomi/pages/tabs_page.dart';
 
 class OnboardingPage extends StatefulWidget {
   static String routeName = "/onboading";
@@ -164,7 +165,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: GestureDetector(
                 onTap: () {
                   if (initialPage == onboardingList.length - 1) {
-                    Navigator.pushNamed(context, HomePage.routeName);
+                    Navigator.pushNamed(context, TabsPage.routeName);
                     return;
                   }
                   _controller.nextPage(

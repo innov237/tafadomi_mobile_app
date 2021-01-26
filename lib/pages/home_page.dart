@@ -2,13 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
-import 'package:tafadomi/widgets/categories.dart';
+import 'package:tafadomi/widgets/categories_widget.dart';
 import 'package:tafadomi/widgets/promoService_widget.dart';
-import 'package:tafadomi/widgets/servicePage.dart';
-import 'package:tafadomi/widgets/request.dart';
+import 'package:tafadomi/widgets/servicePage_widget.dart';
+import 'package:tafadomi/widgets/request_widget.dart';
 import 'package:tafadomi/widgets/prestataire.dart';
-import 'package:tafadomi/widgets/serviceRequest.dart';
-import 'package:tafadomi/widgets/AppBar.dart';
+import 'package:tafadomi/widgets/serviceRequest_widget.dart';
+import 'package:tafadomi/widgets/AppBar_widget.dart';
+import 'package:tafadomi/pages/request/provider_page.dart';
+import 'package:tafadomi/pages/categories/categoriesList_page.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = '/home';
@@ -50,6 +52,7 @@ class _HomePageState extends State<HomePage> {
             costumAppBar(),
             Expanded(
               child: ListView(
+                shrinkWrap: true,
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -71,56 +74,6 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           ],
-        ),
-        bottomNavigationBar: Container(
-          height: 60.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Column(
-                    children: [
-                      Icon(Icons.home),
-                      Text("Accueil"),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => null,
-                  child: Column(
-                    children: [
-                      Icon(Icons.home),
-                      Text("Accueil"),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => null,
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "assets/images/request-icon.png",
-                        height: 25.0,
-                      ),
-                      Text("Accueil"),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => null,
-                  child: Column(
-                    children: [
-                      Icon(Icons.menu),
-                      Text("Accueil"),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );

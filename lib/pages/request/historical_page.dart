@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tafadomi/widgets/AppBar.dart';
-import 'package:tafadomi/widgets/request.dart';
+import 'package:tafadomi/widgets/AppBar_widget.dart';
+import 'package:tafadomi/widgets/request_widget.dart';
 
-class HistoricalPage extends StatefulWidget {
+class Historical_Page extends StatefulWidget {
+  static String routeName = "/historical_page";
   @override
-  _HistoricalPageState createState() => _HistoricalPageState();
+  _Historical_PageState createState() => _Historical_PageState();
 }
 
-class _HistoricalPageState extends State<HistoricalPage> {
-  
-
+class _Historical_PageState extends State<Historical_Page> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

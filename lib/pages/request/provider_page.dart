@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 
 class ServiceProviderPage extends StatefulWidget {
+  static String routeName = "/provider_page";
   @override
   _ServiceProviderPageState createState() => _ServiceProviderPageState();
 }
