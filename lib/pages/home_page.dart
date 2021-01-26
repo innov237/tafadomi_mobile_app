@@ -2,12 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
-import 'package:tafadomi/widgets/categories_widget.dart';
 import 'package:tafadomi/widgets/promoService_widget.dart';
 import 'package:tafadomi/widgets/servicePage_widget.dart';
-import 'package:tafadomi/widgets/request_widget.dart';
-import 'package:tafadomi/widgets/prestataire.dart';
-import 'package:tafadomi/widgets/serviceRequest_widget.dart';
 import 'package:tafadomi/widgets/AppBar_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +46,6 @@ class _HomePageState extends State<HomePage> {
             costumAppBar(),
             Expanded(
               child: ListView(
-                shrinkWrap: true,
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
