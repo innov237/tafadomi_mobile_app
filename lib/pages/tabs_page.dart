@@ -26,11 +26,7 @@ class _TabsPageState extends State<TabsPage> {
 
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: [
-            HomePage(),
-          ],
-        ),
+        body: HomePage(),
         bottomNavigationBar: Container(
           height: 60.0,
           child: Padding(

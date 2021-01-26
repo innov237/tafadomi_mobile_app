@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
             costumAppBar(),
             Expanded(
               child: ListView(
-                shrinkWrap: true,
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
