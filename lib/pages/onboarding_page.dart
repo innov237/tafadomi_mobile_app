@@ -81,7 +81,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           FlatButton(
             onPressed: () {
               if (initialPage == onboardingList.length - 1) {
-                Navigator.pushNamed(context, HomePage.routeName);
+                Navigator.pushNamed(context, TabsPage.routeName);
                 return;
               }
               _controller.nextPage(

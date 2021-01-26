@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:tafadomi/widgets/categories_widget.dart';
 import 'package:tafadomi/widgets/AppBar_widget.dart';
 
-class CategoriesList_page extends StatefulWidget {
-  static String routeName = "/categoriesList_page";
+class CategoriesListPage extends StatefulWidget {
+  static String routeName = "/CategoriesListPage";
   @override
-  _CategoriesList_pageState createState() => _CategoriesList_pageState();
+  _CategoriesListPageState createState() => _CategoriesListPageState();
 }
 
-class _CategoriesList_pageState extends State<CategoriesList_page> {
+class _CategoriesListPageState extends State<CategoriesListPage> {
   @override
   Widget build(BuildContext context) {
     return categoriesList();
@@ -20,12 +20,19 @@ class _CategoriesList_pageState extends State<CategoriesList_page> {
 Widget categoriesList() {
   return SafeArea(
     child: Scaffold(
-      body: Column(
-        children: [
-          costumAppBar(),
-          categories(),
-          categories(),
-        ],
+      appBar: AppBar(title: Text("Categorie"),),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 0.3,
+            mainAxisSpacing: 0.3,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return categories();
+          },
+        ),
       ),
     ),
   );

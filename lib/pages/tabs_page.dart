@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tafadomi/pages/categories/categoriesList_page.dart';
 import 'package:tafadomi/pages/home_page.dart';
+import 'package:tafadomi/pages/request/historical_page.dart';
 import 'package:tafadomi/pages/request/provider_page.dart';
 
 class TabsPage extends StatefulWidget {
@@ -10,38 +11,42 @@ class TabsPage extends StatefulWidget {
 }
 
 class _TabsPageState extends State<TabsPage> {
+  int currentIndex;
+
+  List<Widget> pages = [
+    HomePage(),
+    CategoriesListPage(),
+    Historical_Page(),
+    ServiceProviderPage(),
+  ];
+
+  _setPage(index) {
+    print(index);
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 1;
-    List<Widget> pages = [
-      HomePage(),
-      CategoriesList_page(),
-    ];
-
-    _setPage(index) {
-      setState(() {
-        currentIndex = index;
-      });
-    }
-
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: [
-            HomePage(),
-          ],
-        ),
+        body: pages[currentIndex],
         bottomNavigationBar: Container(
-          height: 60.0,
+          height: 65.0,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, ServiceProviderPage.routeName);
-                  },
+                  onTap: () => _setPage(0),
                   child: Column(
                     children: [
                       Icon(Icons.home),
@@ -50,11 +55,11 @@ class _TabsPageState extends State<TabsPage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => _setPage(0),
+                  onTap: () => _setPage(1),
                   child: Column(
                     children: [
                       Icon(Icons.home),
-                      Text("0"),
+                      Text("Categorie"),
                     ],
                   ),
                 ),
@@ -66,16 +71,16 @@ class _TabsPageState extends State<TabsPage> {
                         "assets/images/request-icon.png",
                         height: 25.0,
                       ),
-                      Text("Accueil"),
+                      Text("Commande"),
                     ],
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => null,
+                  onTap: () => _setPage(3),
                   child: Column(
                     children: [
                       Icon(Icons.menu),
-                      Text("Accueil"),
+                      Text("Menu"),
                     ],
                   ),
                 ),

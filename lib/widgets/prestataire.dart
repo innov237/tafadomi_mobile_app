@@ -159,21 +159,19 @@ class _ServiceProviderState extends State<ServiceProvider> {
             SizedBox(
               height: 20.0,
             ),
-            Row(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.location_on),
-                        Text("Localisation"),
-                      ],
-                    ),
-                    Text("Yaounde Tsinga fecafoot"),
+                    Icon(Icons.location_on),
+                    Text("Localisation"),
                   ],
                 ),
+                Text("Yaounde Tsinga fecafoot"),
               ],
             ),
             SizedBox(

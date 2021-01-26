@@ -9,8 +9,6 @@ import 'package:tafadomi/widgets/request_widget.dart';
 import 'package:tafadomi/widgets/prestataire.dart';
 import 'package:tafadomi/widgets/serviceRequest_widget.dart';
 import 'package:tafadomi/widgets/AppBar_widget.dart';
-import 'package:tafadomi/pages/request/provider_page.dart';
-import 'package:tafadomi/pages/categories/categoriesList_page.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = '/home';
@@ -64,10 +62,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                       _categorieList(),
                       servicePromo(),
-                      requestHistorical(),
-                      categories(),
-                      ServiceProvider(),
-                      serviceRequest(),
                     ],
                   ),
                 ],
