@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
+import 'package:tafadomi/widgets/categories.dart';
 import 'package:tafadomi/widgets/promoService_widget.dart';
 import 'package:tafadomi/widgets/servicePage.dart';
 import 'package:tafadomi/widgets/request.dart';
@@ -10,11 +11,19 @@ import 'package:tafadomi/widgets/serviceRequest.dart';
 import 'package:tafadomi/widgets/AppBar.dart';
 
 class HomePage extends StatefulWidget {
+  static String routeName = '/home';
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  List promoServiceData = [
+    {'label': "Beauty", "description": "Beauty services"},
+    {'label': "Demenagement", "description": "Demenagement services"},
+    {'label': "Baby seting", "description": "Baby seting services"},
+  ];
+
   getCategorie() async {
     Dio dio = Dio();
     final response = await dio.get(ApiConst.baseUrl + ApiConst.getCategorieUrl);
@@ -46,15 +55,15 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // _pormoServices(),
+                      _pormoServices(),
                       SizedBox(
                         height: 10.0,
                       ),
-                      // _categorieList(),
-                      // servicePromo(),
-                      // requestHistorical(),
-                      // categories(),
-                      // ServiceProvider(),
+                      _categorieList(),
+                      servicePromo(),
+                      requestHistorical(),
+                      categories(),
+                      ServiceProvider(),
                       serviceRequest(),
                     ],
                   ),
@@ -134,13 +143,14 @@ class _HomePageState extends State<HomePage> {
         ),
         Container(
           height: 265.0,
-          child: ListView(
+          child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            children: [
-              ServicePromoWidget(),
-              ServicePromoWidget(),
-              ServicePromoWidget(),
-            ],
+            itemCount: promoServiceData.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ServicePromoWidget(
+                promoServiceData: promoServiceData[index],
+              );
+            },
           ),
         ),
       ],

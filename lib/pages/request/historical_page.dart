@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tafadomi/widgets/request.dart';
 import 'package:tafadomi/widgets/AppBar.dart';
+import 'package:tafadomi/widgets/request.dart';
 
-class Historical extends StatefulWidget {
+class HistoricalPage extends StatefulWidget {
   @override
-  _HistoricalState createState() => _HistoricalState();
+  _HistoricalPageState createState() => _HistoricalPageState();
 }
 
-class _HistoricalState extends State<Historical> {
+class _HistoricalPageState extends State<HistoricalPage> {
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +25,7 @@ class _HistoricalState extends State<Historical> {
               SizedBox(
                 height: 10.0,
               ),
-              requestHistorical(),
+              RequestHistoricalWidget(),
             ],
           ),
         ]),

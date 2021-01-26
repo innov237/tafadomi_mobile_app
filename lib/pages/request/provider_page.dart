@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 
-class ServiceProvider extends StatefulWidget {
+class ServiceProviderPage extends StatefulWidget {
   @override
-  _ServiceProviderState createState() => _ServiceProviderState();
+  _ServiceProviderPageState createState() => _ServiceProviderPageState();
 }
 
-class _ServiceProviderState extends State<ServiceProvider> {
+class _ServiceProviderPageState extends State<ServiceProviderPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

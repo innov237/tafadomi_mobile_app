@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 
+class RequestHistoricalWidget extends StatefulWidget {
+  @override
+  _RequestHistoricalWidgetState createState() =>
+      _RequestHistoricalWidgetState();
+}
+
+class _RequestHistoricalWidgetState extends State<RequestHistoricalWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return requestHistorical();
+  }
+}
+
 Widget requestHistorical() {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10.0),

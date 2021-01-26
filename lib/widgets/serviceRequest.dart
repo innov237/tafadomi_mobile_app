@@ -1,5 +1,17 @@
 import 'package:flutter/material.dart';
 
+class ServiceRequestWidget extends StatefulWidget {
+  @override
+  _ServiceRequestWidgetState createState() => _ServiceRequestWidgetState();
+}
+
+class _ServiceRequestWidgetState extends State<ServiceRequestWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return serviceRequest();
+  }
+}
+
 Widget serviceRequest() {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10.0),

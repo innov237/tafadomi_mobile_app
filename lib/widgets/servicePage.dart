@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
-import 'package:tafadomi/pages/home_page.dart';
 
 Widget service() {
   return Container(
