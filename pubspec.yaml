@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   integration_test: ^1.0.1
+  splashscreen: ^1.2.0
 
 
 
