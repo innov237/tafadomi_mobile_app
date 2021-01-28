@@ -15,7 +15,7 @@ class _SplashState extends State<Splash> {
       seconds: 5,
       loaderColor: Colors.black,
       backgroundColor: Colors.white,
-      image: Image.asset("assets/images/cleaning.png"),
+      image: Image.asset("assets/images/logo.png"),
       navigateAfterSeconds: HomePage(),
       photoSize: 100.0,
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:tafadomi/pages/onboarding_page.dart';
 import 'package:tafadomi/routes.dart';
+import 'package:tafadomi/pages/_services/serviceForm_page.dart';
 
 void main() {
   runApp(
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(),
-      initialRoute: OnboardingPage.routeName,
+      initialRoute: ServiceForm.routeName,
       routes: routes,
     );
   }
