@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:tafadomi/widgets/promoService_widget.dart';
 import 'package:tafadomi/widgets/servicePage_widget.dart';
@@ -20,21 +18,9 @@ class _HomePageState extends State<HomePage> {
     {'label': "Baby seting", "description": "Baby seting services"},
   ];
 
-  getCategorie() async {
-    Dio dio = Dio();
-    final response = await dio.get(ApiConst.baseUrl + ApiConst.getCategorieUrl);
-    print(response.data);
-    if (response.statusCode == 200) {
-      print(response.data);
-    } else {
-      print(response);
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    getCategorie();
   }
 
   @override
