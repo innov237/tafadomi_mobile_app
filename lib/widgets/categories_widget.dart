@@ -14,7 +14,7 @@ class _CategorieWidgetState extends State<CategorieWidget> {
     return buildCategory(widget.categorieData);
   }
 
-  Widget buildCategory(Catrgorie categotie) {
+  Widget buildCategory(Categorie categotie) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(

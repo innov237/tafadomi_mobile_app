@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/pages/categories/models/categorie_model.dart';
+import 'package:tafadomi/core/models/api_response.dart';
 import 'package:tafadomi/widgets/categories_widget.dart';
 
 class CategoriesListPage extends StatefulWidget {
@@ -15,21 +16,25 @@ class CategoriesListPage extends StatefulWidget {
 }
 
 class _CategoriesListPageState extends State<CategoriesListPage> {
-  List<Catrgorie> categorieData;
+  List<Categorie> categorieData;
   bool loading = true;
 
   getCategorie() async {
     Dio dio = Dio();
     final response = await dio.get(ApiConst.baseUrl + ApiConst.getCategorieUrl);
-    print(response.data);
+
     if (response.statusCode == 200) {
-      var categorieDat = catrgorieFromJson(json.encode(response.data));
-      setState(() {
-        categorieData = categorieDat;
-        //var categorieDat = catrgorieFromJson(json.encode(response.data));
-        print(categorieDat);
-        loading = false;
-      });
+      ApiResponse apiResponse = apiResponseFromJson(
+        json.encode(response.data),
+      );
+      if (apiResponse.success) {
+        setState(() {
+          categorieData = categorieFromJson(
+            json.encode(apiResponse.data),
+          );
+          loading = false;
+        });
+      }
     } else {
       print(response);
       setState(() {
