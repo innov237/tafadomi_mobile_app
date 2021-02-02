@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(),
-      initialRoute: ServiceForm.routeName,
+      initialRoute: OnboardingPage.routeName,
       routes: routes,
     );
   }

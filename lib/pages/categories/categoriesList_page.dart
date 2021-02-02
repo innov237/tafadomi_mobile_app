@@ -15,7 +15,7 @@ class CategoriesListPage extends StatefulWidget {
 }
 
 class _CategoriesListPageState extends State<CategoriesListPage> {
-  List<Catrgorie> categorieData = [];
+  List<Catrgorie> categorieData;
   bool loading = true;
 
   getCategorie() async {
@@ -23,8 +23,11 @@ class _CategoriesListPageState extends State<CategoriesListPage> {
     final response = await dio.get(ApiConst.baseUrl + ApiConst.getCategorieUrl);
     print(response.data);
     if (response.statusCode == 200) {
+      var categorieDat = catrgorieFromJson(json.encode(response.data));
       setState(() {
-        categorieData = catrgorieFromJson(json.encode(response.data));
+        categorieData = categorieDat;
+        //var categorieDat = catrgorieFromJson(json.encode(response.data));
+        print(categorieDat);
         loading = false;
       });
     } else {
