@@ -13,7 +13,7 @@ import 'package:tafadomi/pages/tabs_page.dart';
 final Map<String, WidgetBuilder> routes = {
   OnboardingPage.routeName: (context) => OnboardingPage(),
   HomePage.routeName: (context) => HomePage(),
-  Services.routeName: (context) => Services(),
+  ServicePage.routeName: (context) => ServicePage(),
   CategoriesListPage.routeName: (context) => CategoriesListPage(),
   Historical_Page.routeName: (context) => Historical_Page(),
   ServiceProviderPage.routeName: (context) => ServiceProviderPage(),

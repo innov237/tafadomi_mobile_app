@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
+import 'package:tafadomi/pages/_services/serviceList_page.dart';
 import 'package:tafadomi/pages/categories/models/categorie_model.dart';
 import 'package:tafadomi/core/models/api_response.dart';
 import 'package:tafadomi/widgets/categories_widget.dart';
@@ -74,8 +75,17 @@ class _CategoriesListPageState extends State<CategoriesListPage> {
                     mainAxisSpacing: 0.3,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    return CategorieWidget(
-                      categorieData: categorieData[index],
+                    return GestureDetector(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ServicePage(
+                            serviceData: categorieData[index].service,
+                          ),
+                        ),
+                      ),
+                      child: CategorieWidget(
+                        categorieData: categorieData[index],
+                      ),
                     );
                   },
                 ),
