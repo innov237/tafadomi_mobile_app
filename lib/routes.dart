@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:tafadomi/features/auth/login/login_page.dart';
 import 'package:tafadomi/pages/onboarding_page.dart';
 import 'package:tafadomi/pages/home_page.dart';
 import 'package:tafadomi/pages/_services/serviceList_page.dart';
@@ -19,4 +20,5 @@ final Map<String, WidgetBuilder> routes = {
   ServiceProviderPage.routeName: (context) => ServiceProviderPage(),
   TabsPage.routeName: (context) => TabsPage(),
   ServiceForm.routeName: (context) => ServiceForm(),
+  LoginPage.routeName :(conext)=>LoginPage(),
 };
