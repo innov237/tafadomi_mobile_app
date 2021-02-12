@@ -7,7 +7,7 @@ import 'package:tafadomi/core/models/api_response.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 
 class RegisterPage extends StatefulWidget {
-  static String routeName ="/register";
+  static String routeName = "/register";
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -16,6 +16,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _passwordController;
   TextEditingController _emailController;
   TextEditingController _userNameController;
+  TextEditingController _userResidenceController;
+  TextEditingController _userPhoneNumberController;
   bool showLoader = false;
 
   @override
@@ -24,6 +26,8 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _userNameController = TextEditingController();
+    _userResidenceController = TextEditingController();
+    _userPhoneNumberController = TextEditingController();
   }
 
   _register() async {
@@ -31,13 +35,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
     var postData = {
       'email': _emailController.text,
-      'passworl': _passwordController.text,
-      'name':_userNameController.text,
+      'password': _passwordController.text,
+      'name': _userNameController.text,
+      'residence': _userResidenceController.text,
+      'telephone': _userPhoneNumberController.text,
     };
 
-    if (_emailController.text.isEmpty || _passwordController.text.isEmpty || _userNameController.text.isEmpty) {
+    if (_emailController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _userNameController.text.isEmpty) {
       print("veuillez renseigner tous les champs");
-      return;
     }
 
     setState(() {
@@ -45,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     var response = await dio.post(
-      ApiConst.baseUrl + ApiConst.loginUrl,
+      ApiConst.baseUrl + ApiConst.registerUrl,
       data: postData,
     );
 
@@ -105,10 +112,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 15.0,
                 ),
                 TextField(
-                  controller: _passwordController,
+                  controller: _emailController,
                   decoration: InputDecoration(
                     labelText: "Email",
-                    suffixIcon: Icon(Icons.vpn_key_outlined),
+                    suffixIcon: Icon(Icons.mail),
                     focusColor: PaletteColor.primaryColor,
                   ),
                 ),
@@ -120,6 +127,28 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(
                     labelText: "Mot de passe",
                     suffixIcon: Icon(Icons.vpn_key_outlined),
+                    focusColor: PaletteColor.primaryColor,
+                  ),
+                ),
+                SizedBox(
+                  height: 35.0,
+                ),
+                TextField(
+                  controller: _userResidenceController,
+                  decoration: InputDecoration(
+                    labelText: "Residence",
+                    suffixIcon: Icon(Icons.map),
+                    focusColor: PaletteColor.primaryColor,
+                  ),
+                ),
+                SizedBox(
+                  height: 35.0,
+                ),
+                TextField(
+                  controller: _userPhoneNumberController,
+                  decoration: InputDecoration(
+                    labelText: "Telephone",
+                    suffixIcon: Icon(Icons.phone),
                     focusColor: PaletteColor.primaryColor,
                   ),
                 ),

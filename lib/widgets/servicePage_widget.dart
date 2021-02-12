@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tafadomi/pages/_services/serviceForm_page.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 
 class ServiceWidget extends StatefulWidget {
@@ -41,22 +42,30 @@ class _ServiceWidgetState extends State<ServiceWidget> {
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
                   ),
-                  Text("a partir de 10.000"),
+                  Text("a partir de " + widget.serviceData['minimal_price']),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(17.0),
                     child: Container(
-                      child: RaisedButton(
-                        padding: EdgeInsets.zero,
-                        elevation: 0.0,
-                        onPressed: () {},
-                        child: Text(
-                          "commander",
-                          style: TextStyle(
-                              color: Color(0xFF44D7F1),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12.0),
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ServiceForm(
+                              serviceData: widget.serviceData,
+                            ),
+                          ),
                         ),
-                        color: Color(0xFF372e5a),
+                        child: RaisedButton(
+                          padding: EdgeInsets.zero,
+                          elevation: 0.0,
+                          child: Text(
+                            "commander",
+                            style: TextStyle(
+                                color: Color(0xFF44D7F1),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.0),
+                          ),
+                          color: Color(0xFF372e5a),
+                        ),
                       ),
                     ),
                   ),

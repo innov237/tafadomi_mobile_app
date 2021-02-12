@@ -8,6 +8,7 @@ import 'package:tafadomi/pages/request/historical_page.dart';
 import 'package:tafadomi/pages/request/provider_page.dart';
 import 'package:tafadomi/pages/_services/serviceForm_page.dart';
 import 'package:tafadomi/pages/tabs_page.dart';
+import 'package:tafadomi/features/auth/register/register_page.dart';
 
 //We user name route
 //All our routes will be aviable here
@@ -20,5 +21,6 @@ final Map<String, WidgetBuilder> routes = {
   ServiceProviderPage.routeName: (context) => ServiceProviderPage(),
   TabsPage.routeName: (context) => TabsPage(),
   ServiceForm.routeName: (context) => ServiceForm(),
-  LoginPage.routeName :(conext)=>LoginPage(),
+  LoginPage.routeName: (conext) => LoginPage(),
+  RegisterPage.routeName: (conext) => RegisterPage(),
 };

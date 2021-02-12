@@ -26,6 +26,7 @@ dependencies:
   integration_test: ^1.0.1
   splashscreen: ^1.2.0
   intl: ^0.16.1
+  date_format: ^1.0.9
 
 
 
