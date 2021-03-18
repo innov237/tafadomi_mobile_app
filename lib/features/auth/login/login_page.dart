@@ -6,6 +6,7 @@ import 'package:tafadomi/core/models/api_response.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:dio/dio.dart';
 import 'package:tafadomi/features/auth/register/register_page.dart';
+import 'package:tafadomi/pages/tabs_page.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = "/login";
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
 
     var postData = {
       'email': _emailController.text,
-      'passworl': _passwordController.text,
+      'password': _passwordController.text,
     };
 
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
@@ -51,8 +52,12 @@ class _LoginPageState extends State<LoginPage> {
       ApiResponse apiResponse = apiResponseFromJson(
         json.encode(response.data),
       );
+      print(response.data['data']['original']['access_token']);
 
       if (apiResponse.success) {
+        Navigator.of(context).pushNamed(
+          TabsPage.routeName,
+        );
         print("bien connecté");
       } else {
         print(apiResponse.message);

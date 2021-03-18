@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tafadomi/pages/_services/model/model_request.dart';
+import 'package:flutter/foundation.dart';
 
 class RequestHistoricalWidget extends StatefulWidget {
+  final requestData;
+  RequestHistoricalWidget({this.requestData});
   @override
   _RequestHistoricalWidgetState createState() =>
       _RequestHistoricalWidgetState();
@@ -9,15 +13,12 @@ class RequestHistoricalWidget extends StatefulWidget {
 class _RequestHistoricalWidgetState extends State<RequestHistoricalWidget> {
   @override
   Widget build(BuildContext context) {
-    return requestHistorical();
+    return requestHistorical(widget.requestData);
   }
-}
 
-Widget requestHistorical() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-    child: InkWell(
-      onTap: () {},
+  Widget requestHistorical(request) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -26,7 +27,7 @@ Widget requestHistorical() {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("soin de visage"),
+                Text(widget.requestData.serviceAsk.name),
                 Text(
                   "Status",
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -37,13 +38,13 @@ Widget requestHistorical() {
               height: 8.0,
             ),
             Text(
-              "21/01/2021",
+              widget.requestData.serviceAsk.createdAt.toString(),
               style: TextStyle(fontSize: 10.0),
             ),
             Divider(),
           ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }

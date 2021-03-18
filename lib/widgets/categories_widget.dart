@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tafadomi/pages/categories/models/categorie_model.dart';
+import 'package:flutter/foundation.dart';
 
 class CategorieWidget extends StatefulWidget {
   final categorieData;
@@ -14,7 +15,7 @@ class _CategorieWidgetState extends State<CategorieWidget> {
     return buildCategory(widget.categorieData);
   }
 
-  Widget buildCategory(Categorie categotie) {
+  Widget buildCategory(categorie) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(

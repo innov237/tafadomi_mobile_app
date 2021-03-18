@@ -24,7 +24,7 @@ class _ServicePageState extends State<ServicePage> {
       child: Scaffold(
         body: ListView.builder(
           itemCount: widget.serviceData.length,
-          itemBuilder: (BuildContext context, int index){
+          itemBuilder: (BuildContext context, int index) {
             return ServiceWidget(serviceData: widget.serviceData[index]);
           },
         ),

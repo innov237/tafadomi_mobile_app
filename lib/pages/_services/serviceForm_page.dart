@@ -14,22 +14,24 @@ class ServiceForm extends StatefulWidget {
 }
 
 class _ServiceFormState extends State<ServiceForm> {
-  DateTime selectedDate;
-  DateTime selectedTime;
+  //DateTime pickedDate;
+  DateTime date;
+  TimeOfDay time;
 
-  final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-  final DateFormat timeFormat = DateFormat('HH:MM');
+  // final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+  // final DateFormat timeFormat = DateFormat('HH:MM');
 
   _dataRequest() async {
     Dio dio = Dio();
 
     var postData = {
-      '	data_solicitation': selectedDate,
-      'time_solicitation': selectedTime,
+      '	data_solicitation': date,
+      'time_solicitation': time,
+      //'service_id': myTime,
     };
 
     var response = await dio.post(
-      ApiConst.baseUrl + ApiConst.registerUrl,
+      ApiConst.baseUrl + ApiConst.serviceRequestUrl,
       data: postData,
     );
     if (response.statusCode == 200) {
@@ -45,6 +47,42 @@ class _ServiceFormState extends State<ServiceForm> {
     }
   }
 
+  _pickDate() async {
+    date = await showDatePicker(
+      context: context,
+      firstDate: DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+      ),
+      lastDate: DateTime(DateTime.now().year + 1),
+      initialDate: DateTime.now(),
+    );
+
+    if (date != null) {
+      setState(() {
+        String mydate = date.month.toString().padLeft(2, '0') +
+            '/' +
+            date.day.toString().padLeft(2, '0') +
+            '/' +
+            date.year.toString();
+      });
+    }
+  }
+
+  _pickTime(context) async {
+    TimeOfDay time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (time != null) {
+      setState(() {
+        String myTime = time.hour.toString() + ':' + time.minute.toString();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -55,37 +93,26 @@ class _ServiceFormState extends State<ServiceForm> {
             child: Column(
               children: <Widget>[
                 // Text(
-                //   dateFormat.format(selectedDate),
+                //   dateFormat.format(pickedDate),
                 //   style: TextStyle(fontWeight: FontWeight.bold),
                 // ),
-                RaisedButton(
-                  child: Text('choisissez la date et l\'heure '),
-                  onPressed: () async {
-                    final selectedDate = await _selectDateTime(context);
-                    if (selectedDate == null) return;
-
-                    print(selectedDate);
-
-                    final selectedTime = await _selectTime(context);
-                    if (selectedTime == null) return;
-                    print(selectedTime);
-                    setState(
-                      () {
-                        this.selectedDate = DateTime(
-                          selectedDate.year,
-                          selectedDate.month,
-                          selectedDate.day,
-                          // selectedTime.hour,
-                          // selectedTime.minute,
-                        );
-                        this.selectedTime =
-                            DateTime(selectedTime.hour, selectedTime.minute);
-                      },
-                    );
-                  },
+                SizedBox(
+                  height: 10.0,
                 ),
-                Text(dateFormat.format(selectedDate)),
-                Text(timeFormat.format(selectedTime)),
+                RaisedButton(
+                  onPressed: () => _pickDate(),
+                  child: Text("date de sollicitation"),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                RaisedButton(
+                  onPressed: () => _pickTime(context),
+                  child: Text("heure de sollicitation"),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 RaisedButton(
                   onPressed: () => _dataRequest(),
                   child: Text("validez"),
@@ -98,19 +125,3 @@ class _ServiceFormState extends State<ServiceForm> {
     );
   }
 }
-
-Future<TimeOfDay> _selectTime(BuildContext context) {
-  final now = DateTime.now();
-
-  return showTimePicker(
-    context: context,
-    initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
-  );
-}
-
-Future<DateTime> _selectDateTime(BuildContext context) => showDatePicker(
-      context: context,
-      initialDate: DateTime.now().add(Duration(seconds: 1)),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );

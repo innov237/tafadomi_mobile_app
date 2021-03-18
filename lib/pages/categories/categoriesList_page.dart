@@ -17,7 +17,7 @@ class CategoriesListPage extends StatefulWidget {
 }
 
 class _CategoriesListPageState extends State<CategoriesListPage> {
-  List<Categorie> categorieData;
+  Categorie categorieData;
   bool loading = true;
 
   getCategorie() async {
@@ -28,10 +28,12 @@ class _CategoriesListPageState extends State<CategoriesListPage> {
       ApiResponse apiResponse = apiResponseFromJson(
         json.encode(response.data),
       );
+      print(response.data['data']);
+
       if (apiResponse.success) {
         setState(() {
           categorieData = categorieFromJson(
-            json.encode(apiResponse.data),
+            json.encode(response.data['data']),
           );
           loading = false;
         });
@@ -68,7 +70,7 @@ class _CategoriesListPageState extends State<CategoriesListPage> {
             : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
-                  itemCount: categorieData.length,
+                  itemCount: categorieData.data.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 0.3,
@@ -79,12 +81,12 @@ class _CategoriesListPageState extends State<CategoriesListPage> {
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ServicePage(
-                            serviceData: categorieData[index].service,
+                            serviceData: categorieData.data[index].service,
                           ),
                         ),
                       ),
                       child: CategorieWidget(
-                        categorieData: categorieData[index],
+                        categorieData: categorieData.data[index],
                       ),
                     );
                   },

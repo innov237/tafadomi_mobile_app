@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/models/api_response.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
+import 'package:tafadomi/pages/tabs_page.dart';
 
 class RegisterPage extends StatefulWidget {
   static String routeName = "/register";
@@ -62,6 +63,9 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
       if (apiResponse.success) {
+        Navigator.of(context).pushNamed(
+          TabsPage.routeName,
+        );
         print("creation du compte éffectuée");
       } else {
         print(apiResponse.message);

@@ -4,5 +4,5 @@ class ApiConst {
   static String getCategorieUrl = "categorie";
   static String loginUrl = "auth/login";
   static String registerUrl = "auth/register";
-  static String sericeRequestUrl = "serviceRequest";
+  static String serviceRequestUrl = "serviceRequest";
 }
