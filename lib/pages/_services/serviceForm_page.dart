@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/models/api_response.dart';
 import 'dart:convert';
+import 'package:tafadomi/core/palettes/colors_palette.dart';
 
 class ServiceForm extends StatefulWidget {
   static String routeName = '/ServiceForm';
@@ -16,6 +17,8 @@ class ServiceForm extends StatefulWidget {
 class _ServiceFormState extends State<ServiceForm> {
   String mydate;
   String myTime;
+  TextEditingController quartier;
+  TextEditingController number;
 
   _dataRequest() async {
     Dio dio = Dio();
@@ -24,6 +27,8 @@ class _ServiceFormState extends State<ServiceForm> {
       'data_solicitation': mydate.toString(),
       'time_solicitation': myTime.toString(),
       'service_id': widget.serviceData['id'],
+      'quater': quartier.text,
+      'phone_number': number.text,
     };
 
     var response = await dio.post(
@@ -113,6 +118,30 @@ class _ServiceFormState extends State<ServiceForm> {
                 RaisedButton(
                   onPressed: () => _pickTime(context),
                   child: Text("heure de sollicitation"),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                TextField(
+                  controller: quartier,
+                  decoration: InputDecoration(
+                    labelText: "quartier",
+                    suffixIcon: Icon(Icons.vpn_key_outlined),
+                    focusColor: PaletteColor.primaryColor,
+                  ),
+                ),
+
+                SizedBox(
+                  height: 10.0,
+                ),
+
+                TextField(
+                  controller: quartier,
+                  decoration: InputDecoration(
+                    labelText: "telephone",
+                    suffixIcon: Icon(Icons.vpn_key_outlined),
+                    focusColor: PaletteColor.primaryColor,
+                  ),
                 ),
                 SizedBox(
                   height: 10.0,
