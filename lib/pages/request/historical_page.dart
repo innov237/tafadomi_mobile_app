@@ -5,7 +5,9 @@ import 'package:tafadomi/widgets/AppBar_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/widgets/request_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tafadomi/pages/request/provider_page.dart';
+import 'package:tafadomi/core/shared_service.dart';
 import 'dart:convert';
 
 class Historical_Page extends StatefulWidget {
@@ -16,23 +18,32 @@ class Historical_Page extends StatefulWidget {
 
 class _Historical_PageState extends State<Historical_Page> {
   ServiceRequest requestData;
+  String token;
+  var userData;
 
-  getHistorique() async {
-    Dio dio = Dio();
-    final response = await dio
-        .get(ApiConst.baseUrl + ApiConst.serviceRequestUrl, queryParameters: {
-      // "token": data.data['data']['original']['access_token']
+  Future getUserData() async {
+    var data = await PreferenceStorage.getDataFormPreferences("userData");
+    setState(() {
+      userData = json.decode(data);
     });
+    getHistorique(userData['data']['original']['access_token']);
+  }
+
+  getHistorique(token) async {
+    Dio dio = Dio();
+    final response = await dio.get(
+        ApiConst.baseUrl + ApiConst.serviceRequestUrl,
+        queryParameters: {"token": token});
     if (response.statusCode == 200) {
       ApiResponse apiResponse = apiResponseFromJson(
         json.encode(response.data),
       );
-      print(response.data);
+      print(response.data['data']);
 
       if (apiResponse.success) {
         setState(() {
           requestData = serviceRequestFromJson(
-            json.encode(apiResponse.data),
+            json.encode(response.data['data']),
           );
         });
       }
@@ -44,7 +55,7 @@ class _Historical_PageState extends State<Historical_Page> {
   @override
   void initState() {
     super.initState();
-    getHistorique();
+    getUserData();
   }
 
   @override
@@ -72,7 +83,8 @@ class _Historical_PageState extends State<Historical_Page> {
                         ),
                       ),
                       child: RequestHistoricalWidget(
-                          requestData: requestData.data[index]),
+                        requestData: requestData.data[index],
+                      ),
                     );
                   },
                 )

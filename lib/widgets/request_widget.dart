@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tafadomi/pages/_services/model/model_request.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 
 class RequestHistoricalWidget extends StatefulWidget {
   final requestData;
@@ -28,18 +29,20 @@ class _RequestHistoricalWidgetState extends State<RequestHistoricalWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(widget.requestData.serviceAsk.name),
-                Text(
-                  "Status",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                widget.requestData.serviceProcessing[0].status != null
+                    ? Text(
+                        widget.requestData.serviceProcessing[0].status,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    : Text("R.A.S")
               ],
             ),
             SizedBox(
               height: 8.0,
             ),
             Text(
-              widget.requestData.serviceAsk.createdAt.toString(),
-              style: TextStyle(fontSize: 10.0),
+              DateFormat('yyyy/MM/dd')
+                  .format(widget.requestData.serviceAsk.createdAt),
             ),
             Divider(),
           ],

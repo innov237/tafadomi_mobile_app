@@ -34,7 +34,9 @@ class _CategorieWidgetState extends State<CategorieWidget> {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
-                child: Text(widget.categorieData.name),
+                child: Text(
+                  widget.categorieData.name,
+                ),
               ),
             ],
           ),

@@ -14,26 +14,23 @@ class ServiceForm extends StatefulWidget {
 }
 
 class _ServiceFormState extends State<ServiceForm> {
-  //DateTime pickedDate;
-  DateTime date;
-  TimeOfDay time;
-
-  // final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-  // final DateFormat timeFormat = DateFormat('HH:MM');
+  String mydate;
+  String myTime;
 
   _dataRequest() async {
     Dio dio = Dio();
 
     var postData = {
-      '	data_solicitation': date,
-      'time_solicitation': time,
-      //'service_id': myTime,
+      'data_solicitation': mydate.toString(),
+      'time_solicitation': myTime.toString(),
+      'service_id': widget.serviceData['id'],
     };
 
     var response = await dio.post(
       ApiConst.baseUrl + ApiConst.serviceRequestUrl,
       data: postData,
     );
+
     if (response.statusCode == 200) {
       ApiResponse apiResponse = apiResponseFromJson(
         json.encode(response.data),
@@ -48,7 +45,7 @@ class _ServiceFormState extends State<ServiceForm> {
   }
 
   _pickDate() async {
-    date = await showDatePicker(
+    DateTime date = await showDatePicker(
       context: context,
       firstDate: DateTime(
         DateTime.now().year,
@@ -61,11 +58,11 @@ class _ServiceFormState extends State<ServiceForm> {
 
     if (date != null) {
       setState(() {
-        String mydate = date.month.toString().padLeft(2, '0') +
+        mydate = date.year.toString().padLeft(2, '0') +
             '/' +
-            date.day.toString().padLeft(2, '0') +
+            date.month.toString().padLeft(2, '0') +
             '/' +
-            date.year.toString();
+            date.day.toString();
       });
     }
   }
@@ -78,9 +75,16 @@ class _ServiceFormState extends State<ServiceForm> {
 
     if (time != null) {
       setState(() {
-        String myTime = time.hour.toString() + ':' + time.minute.toString();
+        myTime = time.hour.toString() + ':' + time.minute.toString();
       });
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    print(widget.serviceData);
+    super.initState();
   }
 
   @override
@@ -116,7 +120,7 @@ class _ServiceFormState extends State<ServiceForm> {
                 RaisedButton(
                   onPressed: () => _dataRequest(),
                   child: Text("validez"),
-                )
+                ),
               ],
             ),
           ),

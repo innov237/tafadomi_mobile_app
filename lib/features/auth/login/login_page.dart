@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/models/api_response.dart';
+import 'package:tafadomi/core/shared_service.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:dio/dio.dart';
 import 'package:tafadomi/features/auth/register/register_page.dart';
 import 'package:tafadomi/pages/tabs_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = "/login";
@@ -55,15 +57,20 @@ class _LoginPageState extends State<LoginPage> {
       print(response.data['data']['original']['access_token']);
 
       if (apiResponse.success) {
+        PreferenceStorage.saveDataToPreferences(
+            'userData', json.encode(response.data));
         Navigator.of(context).pushNamed(
           TabsPage.routeName,
         );
+
         print("bien connecté");
       } else {
         print(apiResponse.message);
       }
     }
   }
+
+  getToken() async {}
 
   @override
   Widget build(BuildContext context) {
