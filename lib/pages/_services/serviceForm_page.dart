@@ -15,6 +15,8 @@ class ServiceForm extends StatefulWidget {
 }
 
 class _ServiceFormState extends State<ServiceForm> {
+  List listItem = ["item1", "item2", "item3"];
+  String valueChoose;
   String mydate;
   String myTime;
   TextEditingController quartier;
@@ -142,6 +144,24 @@ class _ServiceFormState extends State<ServiceForm> {
                     suffixIcon: Icon(Icons.vpn_key_outlined),
                     focusColor: PaletteColor.primaryColor,
                   ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text("dans quelle ville le service doit il etre rendu ?"),
+                DropdownButton(
+                  hint: Text("choix"),
+                  dropdownColor: Colors.grey,
+                  underline: SizedBox(),
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: 36,
+                  style: TextStyle(color: Colors.black, fontSize: 22),
+                  value: valueChoose,
+                  onChanged: (newValue) {
+                    setState(() {
+                      valueChoose = newValue;
+                    });
+                  },
                 ),
                 SizedBox(
                   height: 10.0,
