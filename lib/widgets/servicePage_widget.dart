@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tafadomi/pages/_services/serviceForm_page.dart';
+import 'package:tafadomi/pages/_services/delivery_address.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 
 class ServiceWidget extends StatefulWidget {
@@ -49,9 +49,9 @@ class _ServiceWidgetState extends State<ServiceWidget> {
                       child: GestureDetector(
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => ServiceForm(
-                              serviceData: widget.serviceData,
-                            ),
+                            builder: (context) => DeliveryAddressForm(
+                                // serviceData: widget.serviceData,
+                                ),
                           ),
                         ),
                         child: RaisedButton(

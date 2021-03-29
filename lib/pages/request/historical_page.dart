@@ -26,6 +26,7 @@ class _Historical_PageState extends State<Historical_Page> {
     setState(() {
       userData = json.decode(data);
     });
+
     getHistorique(userData['data']['original']['access_token']);
   }
 
@@ -54,8 +55,12 @@ class _Historical_PageState extends State<Historical_Page> {
 
   @override
   void initState() {
+    var user = getUserData();
+    print("-----------------");
+    print(getUserData());
+    print("-----------------");
     super.initState();
-    getUserData();
+    // getUserData();
   }
 
   @override
