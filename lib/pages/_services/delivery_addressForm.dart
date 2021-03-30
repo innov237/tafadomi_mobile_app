@@ -9,6 +9,8 @@ import 'package:tafadomi/core/shared_service.dart';
 import 'package:tafadomi/pages/_services/serviceForm_page.dart';
 
 class DeliveryAddressForm extends StatefulWidget {
+  final serviceData;
+  DeliveryAddressForm({@required this.serviceData});
   static String routeName = '/DeliveryAddressForm';
   @override
   _DeliveryAddressFormState createState() => _DeliveryAddressFormState();
@@ -19,6 +21,8 @@ class _DeliveryAddressFormState extends State<DeliveryAddressForm> {
   TextEditingController number;
   var user;
   var userData;
+  var serviceData;
+  DeliveryAddressForm delivery;
 
   getUserData() async {
     var data = await PreferenceStorage.getDataFormPreferences("userData");
@@ -32,6 +36,10 @@ class _DeliveryAddressFormState extends State<DeliveryAddressForm> {
   void initState() {
     quartier = TextEditingController();
     number = TextEditingController();
+    PreferenceStorage.saveDataToPreferences(
+      'serviceData',
+      json.encode(widget.serviceData),
+    );
     super.initState();
   }
 
@@ -55,9 +63,11 @@ class _DeliveryAddressFormState extends State<DeliveryAddressForm> {
       );
 
       if (apiResponse.success) {
-        Navigator.of(context).pushNamed(
-          ServiceForm.routeName,
-        );
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ServiceForm(
+            deliveryData: delivery,
+          ),
+        ));
         print("succes");
       } else {
         print(apiResponse.message);

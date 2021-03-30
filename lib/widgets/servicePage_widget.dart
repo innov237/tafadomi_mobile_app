@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:tafadomi/pages/_services/delivery_address.dart';
+import 'package:tafadomi/pages/_services/delivery_addressForm.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
+import 'package:tafadomi/core/shared_service.dart';
 
 class ServiceWidget extends StatefulWidget {
   final serviceData;
@@ -9,10 +12,24 @@ class ServiceWidget extends StatefulWidget {
   @override
   _ServiceWidgetState createState() => _ServiceWidgetState();
 }
+// PreferenceStorage.saveDataToPreferences(
+//           'userData',
+//           json.encode(response.data),
+//         );
 
 class _ServiceWidgetState extends State<ServiceWidget> {
   @override
   Widget build(BuildContext context) {
+    // void initState() {
+    //   // TODO: implement initState
+    //   print("------------------------------------");
+    //   print(
+    //     jsonEncode(widget.serviceData),
+    //   );
+    //   print("------------------------------------");
+    //   super.initState();
+    // }
+
     return Container(
       height: 130.0,
       child: Card(
@@ -50,8 +67,8 @@ class _ServiceWidgetState extends State<ServiceWidget> {
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => DeliveryAddressForm(
-                                // serviceData: widget.serviceData,
-                                ),
+                              serviceData: widget.serviceData,
+                            ),
                           ),
                         ),
                         child: RaisedButton(

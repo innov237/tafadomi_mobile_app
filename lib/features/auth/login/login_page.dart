@@ -58,7 +58,9 @@ class _LoginPageState extends State<LoginPage> {
 
       if (apiResponse.success) {
         PreferenceStorage.saveDataToPreferences(
-            'userData', json.encode(response.data));
+          'userData',
+          json.encode(response.data),
+        );
         Navigator.of(context).pushNamed(
           TabsPage.routeName,
         );

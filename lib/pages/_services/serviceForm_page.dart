@@ -5,11 +5,12 @@ import 'package:tafadomi/core/constantes/api_constante.dart';
 import 'package:tafadomi/core/models/api_response.dart';
 import 'dart:convert';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
+import 'package:tafadomi/core/shared_service.dart';
 
 class ServiceForm extends StatefulWidget {
   static String routeName = '/ServiceForm';
-  final serviceData;
-  ServiceForm({@required this.serviceData});
+  final deliveryData;
+  ServiceForm({@required this.deliveryData});
   @override
   _ServiceFormState createState() => _ServiceFormState();
 }
@@ -17,16 +18,26 @@ class ServiceForm extends StatefulWidget {
 class _ServiceFormState extends State<ServiceForm> {
   String mydate;
   String myTime;
-  TextEditingController quartier;
-  TextEditingController number;
+  var serviceData;
+  var service;
 
-  _dataRequest() async {
+  getServiceData() async {
+    var datas = await PreferenceStorage.getDataFormPreferences("serviceData");
+    setState(() {
+      serviceData = json.decode(datas);
+    });
+    _dataRequest(serviceData);
+  }
+
+  _dataRequest(service) async {
+    print(widget.deliveryData);
     Dio dio = Dio();
 
     var postData = {
       'data_solicitation': mydate.toString(),
       'time_solicitation': myTime.toString(),
-      'service_id': widget.serviceData['id'],
+      'service_id': service['id'],
+      'delivery_address_id': widget.deliveryData.id,
     };
 
     var response = await dio.post(
@@ -86,6 +97,7 @@ class _ServiceFormState extends State<ServiceForm> {
   // @override
   // void initState() {
   //   // TODO: implement initState
+  //   getServiceData();
   //   print(widget.serviceData);
   //   super.initState();
   // }
@@ -99,10 +111,6 @@ class _ServiceFormState extends State<ServiceForm> {
             padding: const EdgeInsets.only(top: 200.0),
             child: Column(
               children: <Widget>[
-                // Text(
-                //   dateFormat.format(pickedDate),
-                //   style: TextStyle(fontWeight: FontWeight.bold),
-                // ),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -120,37 +128,8 @@ class _ServiceFormState extends State<ServiceForm> {
                 SizedBox(
                   height: 10.0,
                 ),
-                TextField(
-                  controller: quartier,
-                  decoration: InputDecoration(
-                    labelText: "quartier",
-                    suffixIcon: Icon(Icons.vpn_key_outlined),
-                    focusColor: PaletteColor.primaryColor,
-                  ),
-                ),
-
-                SizedBox(
-                  height: 10.0,
-                ),
-
-                TextField(
-                  controller: quartier,
-                  decoration: InputDecoration(
-                    labelText: "telephone",
-                    suffixIcon: Icon(Icons.vpn_key_outlined),
-                    focusColor: PaletteColor.primaryColor,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text("dans quelle ville le service doit il etre rendu ?"),
-
-                SizedBox(
-                  height: 10.0,
-                ),
                 RaisedButton(
-                  onPressed: () => _dataRequest(),
+                  onPressed: () => getServiceData(),
                   child: Text("validez"),
                 ),
               ],
