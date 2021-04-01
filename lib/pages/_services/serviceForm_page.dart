@@ -6,6 +6,7 @@ import 'package:tafadomi/core/models/api_response.dart';
 import 'dart:convert';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:tafadomi/core/shared_service.dart';
+import 'package:tafadomi/pages/_services/model/delivery_address_model.dart';
 
 class ServiceForm extends StatefulWidget {
   static String routeName = '/ServiceForm';
@@ -18,30 +19,58 @@ class ServiceForm extends StatefulWidget {
 class _ServiceFormState extends State<ServiceForm> {
   String mydate;
   String myTime;
+  var lastId;
   var serviceData;
   var service;
+  DeliveryAddress deliveryD;
+  var id;
 
   getServiceData() async {
     var datas = await PreferenceStorage.getDataFormPreferences("serviceData");
     setState(() {
       serviceData = json.decode(datas);
     });
+
     _dataRequest(serviceData);
   }
 
+  Future<dynamic> _getlastdelivery() async {
+    Dio dio = Dio();
+    final responses =
+        await dio.get(ApiConst.baseUrl + ApiConst.firstDeliveryUrl);
+
+    if (responses.statusCode == 200) {
+      ApiResponse apiResponse = apiResponseFromJson(
+        json.encode(responses.data),
+      );
+
+      if (apiResponse.success) {
+        setState(() {
+          deliveryD = deliveryAddressFromJson(
+            json.encode(responses.data),
+          );
+        });
+      }
+    }
+    return json.encode(responses.data['data']['id']);
+  }
+
   _dataRequest(service) async {
-    print(widget.deliveryData);
     Dio dio = Dio();
 
+    var solicitationHr = DateFormat("hh:mm:ss").format(DateTime.now());
+    print(solicitationHr);
     var postData = {
       'data_solicitation': mydate.toString(),
       'time_solicitation': myTime.toString(),
       'service_id': service['id'],
-      'delivery_address_id': widget.deliveryData.id,
+      'delivery_address_id': id,
+      'user_id': widget.deliveryData,
+      'solicitation_hour': solicitationHr,
     };
 
     var response = await dio.post(
-      ApiConst.baseUrl + ApiConst.serviceRequestUrl,
+      ApiConst.baseUrl + ApiConst.requestUrl,
       data: postData,
     );
 
@@ -94,13 +123,20 @@ class _ServiceFormState extends State<ServiceForm> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   getServiceData();
-  //   print(widget.serviceData);
-  //   super.initState();
-  // }
+  void initId() {
+    _getlastdelivery().then((value) {
+      setState(() {
+        id = value;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    initId();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

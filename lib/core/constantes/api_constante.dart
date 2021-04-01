@@ -8,4 +8,6 @@ class ApiConst {
   static String serviceRequestUrl = "historical";
   static String citiesUrl = "city";
   static String deliveryAddressUrl = "deliveryAddress";
+  static String firstDeliveryUrl = "getFirst";
+  static String requestUrl = "serviceRequest";
 }

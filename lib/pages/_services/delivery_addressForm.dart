@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:tafadomi/core/shared_service.dart';
 import 'package:tafadomi/pages/_services/serviceForm_page.dart';
+import 'package:tafadomi/pages/_services/model/model_request.dart';
 
 class DeliveryAddressForm extends StatefulWidget {
   final serviceData;
@@ -22,7 +23,7 @@ class _DeliveryAddressFormState extends State<DeliveryAddressForm> {
   var user;
   var userData;
   var serviceData;
-  DeliveryAddressForm delivery;
+  ServiceRequest delivery;
 
   getUserData() async {
     var data = await PreferenceStorage.getDataFormPreferences("userData");
@@ -63,11 +64,13 @@ class _DeliveryAddressFormState extends State<DeliveryAddressForm> {
       );
 
       if (apiResponse.success) {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ServiceForm(
-            deliveryData: delivery,
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ServiceForm(
+              deliveryData: user['original']['user']['id'],
+            ),
           ),
-        ));
+        );
         print("succes");
       } else {
         print(apiResponse.message);
