@@ -29,12 +29,10 @@ class _RequestHistoricalWidgetState extends State<RequestHistoricalWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(widget.requestData.serviceAsk.name),
-                widget.requestData.serviceProcessing[0].status != null
-                    ? Text(
-                        widget.requestData.serviceProcessing[0].status,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    : Text("R.A.S")
+                Text(
+                  "status",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
             SizedBox(

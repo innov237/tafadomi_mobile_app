@@ -58,7 +58,10 @@ class _TabsPageState extends State<TabsPage> {
                   onTap: () => _setPage(1),
                   child: Column(
                     children: [
-                      Icon(Icons.home),
+                      Image.asset(
+                        "assets/images/categori.png",
+                        height: 25.0,
+                      ),
                       Text("Categorie"),
                     ],
                   ),

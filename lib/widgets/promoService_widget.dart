@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
+import 'package:tafadomi/pages/_services/delivery_addressForm.dart';
 
 class ServicePromoWidget extends StatefulWidget {
   final promoServiceData;
@@ -52,7 +53,7 @@ class _ServicePromoWidgetState extends State<ServicePromoWidget> {
                         Padding(
                           padding: const EdgeInsets.only(right: 73.0),
                           child: Text(
-                            widget.promoServiceData['label'],
+                            widget.promoServiceData.service.name,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -62,20 +63,22 @@ class _ServicePromoWidgetState extends State<ServicePromoWidget> {
                         Padding(
                           padding: const EdgeInsets.only(right: 25.0),
                           child: Text(
-                            "à partir de 10.000 FCFA",
+                            "A partir de : " +
+                                widget.promoServiceData.service.minimalPrice +
+                                " FCFA",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                         SizedBox(
                           height: 4.0,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            widget.promoServiceData['description'],
-                            style: TextStyle(fontSize: 13.0),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        //   child: Text(
+                        //     widget.promoServiceData['description'],
+                        //     style: TextStyle(fontSize: 13.0),
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 3.0,
                         ),
@@ -89,7 +92,13 @@ class _ServicePromoWidgetState extends State<ServicePromoWidget> {
                         child: RaisedButton(
                           padding: EdgeInsets.zero,
                           elevation: 0.0,
-                          onPressed: () {},
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => DeliveryAddressForm(
+                                serviceData: widget.promoServiceData,
+                              ),
+                            ),
+                          ),
                           child: Text(
                             "commander",
                             style: TextStyle(
@@ -119,7 +128,7 @@ class _ServicePromoWidgetState extends State<ServicePromoWidget> {
             ),
             child: Center(
               child: Text(
-                "-14%",
+                widget.promoServiceData.reduction + "%",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),

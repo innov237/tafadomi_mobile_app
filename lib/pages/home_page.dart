@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tafadomi/core/palettes/colors_palette.dart';
 import 'package:tafadomi/widgets/promoService_widget.dart';
 import 'package:tafadomi/widgets/servicePage_widget.dart';
+import 'package:tafadomi/widgets/servicePromoWidget.dart';
 import 'package:tafadomi/widgets/AppBar_widget.dart';
+import 'package:dio/dio.dart';
+import 'package:tafadomi/core/models/api_response.dart';
+import 'package:tafadomi/core/constantes/api_constante.dart';
+import 'dart:convert';
+import 'package:tafadomi/pages/_services/discounted/model/discountedModel.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = '/home';
@@ -12,14 +18,39 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List promoServiceData = [
-    {'label': "Beauty", "description": "Beauty services"},
-    {'label': "Demenagement", "description": "Demenagement services"},
-    {'label': "Baby seting", "description": "Baby seting services"},
-  ];
+  DiscountedService discountedData;
+  bool loading = true;
+
+  getServicePromo() async {
+    Dio dio = Dio();
+    final response =
+        await dio.get(ApiConst.baseUrl + ApiConst.discountedServiceUrl);
+
+    if (response.statusCode == 200) {
+      ApiResponse apiResponse = apiResponseFromJson(
+        json.encode(response.data),
+      );
+      print(response.data['data']);
+
+      if (apiResponse.success) {
+        setState(() {
+          discountedData = discountedServiceFromJson(
+            json.encode(response.data['data']),
+          );
+          loading = false;
+        });
+      }
+    } else {
+      print(response);
+      setState(() {
+        loading = false;
+      });
+    }
+  }
 
   @override
   void initState() {
+    getServicePromo();
     super.initState();
   }
 
@@ -71,15 +102,17 @@ class _HomePageState extends State<HomePage> {
         ),
         Container(
           height: 265.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: promoServiceData.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ServicePromoWidget(
-                promoServiceData: promoServiceData[index],
-              );
-            },
-          ),
+          child: discountedData != null
+              ? ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: discountedData.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ServicePromoWidget(
+                      promoServiceData: discountedData.data[index],
+                    );
+                  },
+                )
+              : Center(child: CircularProgressIndicator()),
         ),
       ],
     );

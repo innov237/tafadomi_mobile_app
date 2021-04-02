@@ -55,12 +55,8 @@ class _Historical_PageState extends State<Historical_Page> {
 
   @override
   void initState() {
-    var user = getUserData();
-    print("-----------------");
-    print(getUserData());
-    print("-----------------");
+    getUserData();
     super.initState();
-    // getUserData();
   }
 
   @override

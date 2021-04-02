@@ -10,4 +10,5 @@ class ApiConst {
   static String deliveryAddressUrl = "deliveryAddress";
   static String firstDeliveryUrl = "getFirst";
   static String requestUrl = "serviceRequest";
+  static String discountedServiceUrl = "discounted";
 }
