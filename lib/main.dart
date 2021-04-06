@@ -6,6 +6,7 @@ import 'package:tafadomi/pages/onboarding_page.dart';
 import 'package:tafadomi/routes.dart';
 import 'package:tafadomi/pages/tabs_page.dart';
 import 'package:tafadomi/pages/_services/serviceForm_page.dart';
+import 'package:tafadomi/pages/splash_screen.dart';
 
 void main() {
   runApp(
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(),
-      initialRoute: LoginPage.routeName,
+      initialRoute: Splash.routeName,
       routes: routes,
     );
   }

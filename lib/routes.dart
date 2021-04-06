@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/widgets.dart';
 import 'package:tafadomi/features/auth/login/login_page.dart';
 import 'package:tafadomi/pages/onboarding_page.dart';
@@ -9,6 +11,7 @@ import 'package:tafadomi/pages/request/provider_page.dart';
 import 'package:tafadomi/pages/_services/serviceForm_page.dart';
 import 'package:tafadomi/pages/tabs_page.dart';
 import 'package:tafadomi/features/auth/register/register_page.dart';
+import 'package:tafadomi/pages/splash_screen.dart';
 
 //We user name route
 //All our routes will be aviable here
@@ -23,4 +26,5 @@ final Map<String, WidgetBuilder> routes = {
   ServiceForm.routeName: (context) => ServiceForm(),
   LoginPage.routeName: (conext) => LoginPage(),
   RegisterPage.routeName: (conext) => RegisterPage(),
+  Splash.routeName: (context) => Splash(),
 };
